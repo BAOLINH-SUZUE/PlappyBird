@@ -25,6 +25,7 @@ public class PlappyBird extends ApplicationAdapter {
 	float velocity = 0;
 	Circle birdcircle;
 	int score = 0;
+	int bestscore = 0;
 	int scoringTube= 0;
 	BitmapFont font;
 	int gameState = 0;
@@ -66,7 +67,7 @@ public class PlappyBird extends ApplicationAdapter {
 		bottomTube = new Texture("bottomtube.png");
 		maxTubeOffset = Gdx.graphics.getHeight()/2 - gap/2 - 100;
 		randomGenerator = new Random();
-		//distanceBetweenTheTube = Gdx.graphics.getHeight()* 3/4;
+		distanceBetweenTheTube = Gdx.graphics.getHeight()* 3/4;
 		topTubeRectangle = new Rectangle[numberOfTubes];
 		bottomTubeRectangles = new Rectangle[numberOfTubes];
 		startGame();
@@ -95,6 +96,7 @@ public class PlappyBird extends ApplicationAdapter {
 			if (tubeX[scoringTube] < Gdx.graphics.getWidth() / 2) {
 				Gdx.app.log("Score", String.valueOf(score));
 				score++;
+
 				if (scoringTube < 4) {
 					scoringTube++;
 				} else {
@@ -104,14 +106,14 @@ public class PlappyBird extends ApplicationAdapter {
 
 
 			if (Gdx.input.justTouched()) {
-				velocity = -30;
+				velocity = -27;
 
 			}
 			for (int i = 0; i < numberOfTubes; i++) {
 
 				if (tubeX[i] < -topTube.getWidth()) {
 					tubeX[i] += numberOfTubes * distanceBetweenTheTube;
-				//	tubeOffset[i]= (randomGenerator.nextFloat()- 0.5f ) * (Gdx.graphics.getHeight() - gap - 200);
+					tubeOffset[i]= (randomGenerator.nextFloat()- 0.5f ) * (Gdx.graphics.getHeight() - gap - 200);
 				} else {
 					tubeX[i] = tubeX[i] - tubeVelocity;
 				}
@@ -149,7 +151,7 @@ public class PlappyBird extends ApplicationAdapter {
 				startGame();
 				score= 0;
 				scoringTube= 0;
-			velocity =0;
+				velocity =0;
 			}
 			}
 
